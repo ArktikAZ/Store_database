@@ -13,7 +13,6 @@
         table{
             border-collapse: collapse;
             width: 100%;
-            table-layout: fixed;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
