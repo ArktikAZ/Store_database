@@ -1,6 +1,3 @@
-<?php
-    require('dbconnect.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +10,6 @@
         table{
             border-collapse: collapse;
             width: 100%;
-            table-layout: fixed;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
