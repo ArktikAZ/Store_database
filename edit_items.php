@@ -56,7 +56,7 @@
         <hr>
         <form>
             <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า" required><br>
-            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required>
+            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required><br>
             <input type="radio" value="add" name="operation" id="add" required><label for="add">เพิ่มจำนวนสินค้า</label>
             <input type="radio" value="subtract" name="operation" id="subtract"><label for="subtract">ลดจำนวนสินค้า</label>
             <input type="radio" value="delete" name="operation" id="delete"><label for="delete">ลบรายการสินค้า</label>
