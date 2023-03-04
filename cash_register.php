@@ -57,8 +57,8 @@
         <h>Cash Register</h>
         <hr>
         <form>
-        <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า"><br>
-            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า"> <button>ตกลง</button>
+            <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า" require><br>
+            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" require> <button>ตกลง</button>
         </form>
         <p>รายการสินค้าที่ซื้อ</p>
         <table>
