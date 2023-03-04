@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
+:root{
+    font-size: 16px;
+    font-family: "Kanit", Helvetica, Arial, sans-serif;
+    --bg-primary: #303033;
+    --bg-nav: #24243e;
+    --bg-navhover: #34348e;
+    --text-primary: #ffffff;
+    --text-secondary: #989898;
+}
+/*CSS for Sidebar*/
+.sidebar {
+    margin: 0;
+    position: fixed;
+    background-color: var(--bg-nav);
+    transition: width 100ms ease;
+}
+
+.nav-item:last-child{
+    margin-top: auto;
+}
+
+.nav-item{
+    width: 100%;
+}
+
+.nav-link{
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    color: var(--text-secondary);
+    height: 5rem;
+    filter: grayscale(100%) opacity(0.7);
+    transition: 400ms;
+}
+.nav-link:hover{
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-navhover);
+    color: var(--text-primary);
+}
+.nav-link svg{
+    min-width: 2rem;
+    max-width: 2rem;
+    max-height: 2rem;
+    margin:0 1.5rem;
+    color:rgb(36, 93, 208);
+}
+
+.link-text{
+    display: none;
+    margin-left: 1rem;
+}
+
+.active .nav-link{
+    filter: grayscale(0%) opacity(1);
+}
+
+@media only screen and (min-width: 600px){
+    .sidebar{
+        top:0;
+        width: 5rem;
+        height: 100vh;
+    }
+    .sidebar:hover{
+        width:12rem;
+    }
+    .sidebar:hover .link-text{
+        display: inline;
+    }
+    .content{
+        color: var(--text-primary);
+        margin-left: 5rem;
+        padding: 20px;
+    }
+    .sidebar-nav{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .sidebar{
+        top:0;
+        width: 100vw;
+        height: 5rem;
+    }
+    .content{
+        color: var(--text-primary);
+        margin-top: 5rem;
+        padding: 20px;
+    }
+    .sidebar-nav{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+    }
+    .nav-link{
+        display: flex;
+        justify-content: center;
+    }
+}
+/*CSS for real content*/
+body{
+    margin: 0px;
+    background-color: var(--bg-primary);
+}
+
+body::-webkit-scrollbar{
+    width: 0.75rem;
+}
+
+body::-webkit-scrollbar-track{
+    background: #acadaf;
+}
+
+body::-webkit-scrollbar-thumb{
+    background: #29299b;
+}
+
+button{
+    background-color: rgb(113, 10, 150);
+    color:var(--text-primary);
+    border: none;
+    border-radius: 4px;
+    width: 3rem;
+    height: 2rem;
+}
+
+input{
+    margin:0.5rem 0;
+}

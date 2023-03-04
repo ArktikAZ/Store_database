@@ -1,0 +1,11 @@
+Customer table
+fields
+-name
+-surname
+-amount of stamp
+
+Product table
+fields
+-product_name
+-product_price
+-stamp
