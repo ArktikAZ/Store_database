@@ -1,3 +1,9 @@
+<?php
+    require('dbconnect.php');
+    $data = mysqli_query($con,"SELECT * FROM products");
+    $rowcount = mysqli_query($con,"SELECT product_id FROM products");
+    $existed = array();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +15,8 @@
     <style>
         table{
             border-collapse: collapse;
-            width: 100%;
+            width: 50rem;
+            table-layout: fixed;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
@@ -48,25 +55,57 @@
         </ul>
     </nav>
     <div class="content">
-        <h>Edit storage</h>
+        <h2>Edit storage</h2>
         <hr>
-        <form>
-            <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า" required><br>
-            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required><br>
-            <input type="radio" value="add" name="operation" id="add" required><label for="add">เพิ่มจำนวนสินค้า</label>
-            <input type="radio" value="subtract" name="operation" id="subtract"><label for="subtract">ลดจำนวนสินค้า</label>
-            <input type="radio" value="delete" name="operation" id="delete"><label for="delete">ลบรายการสินค้า</label>
+        <p>Add Product</p>
+        <form method="post" action="edit_items.php">
+            <label for="name">Product name :</label><input id="name" name="name" type="text" placeholder="กรอกชื่อสินค้า" required><br>
+            <label for="price">Price :</label><input type="number" id="price" name="price" min="0" placeholder="กรอกราคาสินค้า" required><br>
+            <label for="quantity">Quantity :</label><input type="number" id="quantity" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required><br>
+            <label for="stamp">Stamp :</label><input type="number" id="stamp" name="stamp" min="0" placeholder="กรอกจำนวนแสตมป์เมื่อซื้อ" required><br>
             <br><button>ตกลง</button>
         </form>
+        <?php
+            $name=$_POST['name'];
+            $price=$_POST['price'];
+            $quantity=$_POST['quantity'];
+            $stamp=$_POST['stamp'];
+            while($row = mysqli_fetch_assoc($rowcount)){
+                array_push($existed,$row['product_id']);
+            }
+            $compare_array = range(1, max($existed)+1);
+            $missing_values = array_diff($compare_array, $existed);
+            $value = array_pop(array_reverse($missing_values));
+            if(!empty($name)){
+                $insert = "INSERT INTO products (product_id, product_name, product_price, product_quantity, product_stamp) VALUES ($value,'$name',$price,$quantity,$stamp) ON DUPLICATE KEY UPDATE product_name = '$name'";
+                if (!mysqli_query($con,$insert)) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($con);
+                }
+            };
+        ?>
         <p>รายการสินค้า</p>
         <table>
             <tr>
                 <th>รหัสสินค้า</th>
-                <th>ชื่อ</th>
+                <th style="width:40%">ชื่อ</th>
                 <th>ราคา</th>
+                <th>จำนวนสินค้า</th>
                 <th>จำนวนแสตมป์</th>
             </tr>
+            <?php $data = mysqli_query($con,"SELECT * FROM products");
+            while($row=mysqli_fetch_assoc($data)){
+                echo"<tr>";
+                echo"<th>".$row['product_id']."</th>";
+                echo"<th>".$row['product_name']."</th>";
+                echo"<th>".$row['product_price']."</th>";
+                echo"<th>".$row['product_quantity']."</th>";
+                echo"<th>".$row['product_stamp']."</th>";
+                echo"</tr>";
+            };
+            ?>
+
         </table>
     </div>
+    
 </body>
 </html>
