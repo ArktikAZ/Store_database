@@ -9,7 +9,7 @@
     <style>
         table{
             border-collapse: collapse;
-            width: 100%;
+            width: 50rem;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
@@ -54,7 +54,7 @@
         </ul>
     </nav>
     <div class="content">
-        <h>Cash Register</h>
+        <h2>Cash Register</h2>
         <hr>
         <form>
             <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า" required><br>
@@ -78,8 +78,7 @@
             <p>
                 ยอดสุทธิ ... บาท<br>
                 เงินสด/เงินทอน ... บาท<br>
-                ได้รับเงินทอน ... บาท<br>
-                แสตมป์ที่ได้ ... บาท 
+                แสตมป์ที่ได้ ... ชิ้น
             </p>
         </div>
     </div>

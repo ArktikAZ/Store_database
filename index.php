@@ -45,7 +45,7 @@
         </ul>
     </nav>
     <div class="content">
-        <h>Store Management System</h>
+        <h2>Store Management System</h2>
         <hr>
         <div class="promotion">
             โปรโมชั่นวันนี้<br>

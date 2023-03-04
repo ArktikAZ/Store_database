@@ -9,7 +9,8 @@
     <style>
         table{
             border-collapse: collapse;
-            width: 100%;
+            width: 50rem;
+            table-layout: fixed;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
@@ -48,14 +49,15 @@
         </ul>
     </nav>
     <div class="content">
-        <h>Data table here</h>
+        <h2>Data table here</h2>
         <hr>
         <p>รายการสินค้า</p>
         <table>
             <tr>
                 <th>รหัสสินค้า</th>
-                <th>ชื่อ</th>
+                <th style="width:40%">ชื่อ</th>
                 <th>ราคา</th>
+                <th>จำนวนสินค้า</th>
                 <th>จำนวนแสตมป์</th>
             </tr>
         </table>
