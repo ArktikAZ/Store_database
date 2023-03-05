@@ -1,16 +1,11 @@
-Database storedb
-table
-:products
+Customer table
 fields
--product_id type(int)
--product_name type(varchar(100)) KEY
--product_price type(int)
--product_quantity type(int)
--product_stamp type(int)
+-name
+-surname
+-amount of stamp
 
-:customer
+Product table
 fields
--customer_id type(int) KEY
--customer_name type(varchar(100))
--customer_surname type(varchar(100))
--customer_stamp type(int)
+-product_name
+-product_price
+-stamp
