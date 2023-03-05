@@ -1,0 +1,20 @@
+Database storedb
+
+customer table
+fields
+-name
+-surname
+-amount of stamp
+
+products table
+fields
+-product_id
+-product_name
+-product_price
+-product_quantity
+-product_stamp
+
+temp
+-t_name
+-t_price
+-t_stamp
