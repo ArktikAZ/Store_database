@@ -17,9 +17,7 @@
         $missing_values = array_diff($compare_array, $existed);
         $value = array_pop(array_reverse($missing_values));
         $insert = "INSERT INTO products (product_id, product_name, product_price, product_quantity, product_stamp) VALUES ($value,'$name',$price,$quantity,$stamp) ON DUPLICATE KEY UPDATE product_name = '$name'";
-        if (!mysqli_query($con,$insert)) {
-            echo "Error: " . $sql . "<br>" . mysqli_error($con);
-        }
+        mysqli_query($con,$insert);
     }
     else if(!empty($Delete)){
         mysqli_query($con,"DELETE FROM products WHERE product_id= $Delete");
