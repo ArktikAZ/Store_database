@@ -1,8 +1,39 @@
 <?php
     require('dbconnect.php');
-    $data = mysqli_query($con,"SELECT * FROM products");
-    $rowcount = mysqli_query($con,"SELECT product_id FROM products");
-    $existed = array();
+    $name=$_POST['name'];
+    $price=$_POST['price'];
+    $quantity=$_POST['quantity'];
+    $stamp=$_POST['stamp'];
+    $Delete=$_POST['delete_item'];
+    $Edit=$_POST['edit_item'];
+    $rownum = mysqli_num_rows(mysqli_query($con,"SELECT * FROM products"));
+    if(!empty($name)){
+        $rowcount = mysqli_query($con,"SELECT product_id FROM products");
+        $existed = array(0);
+        while($row = mysqli_fetch_assoc($rowcount)){
+            array_push($existed,$row['product_id']);
+        }
+        $compare_array = range(0, max($existed)+1);
+        $missing_values = array_diff($compare_array, $existed);
+        $value = array_pop(array_reverse($missing_values));
+        $insert = "INSERT INTO products (product_id, product_name, product_price, product_quantity, product_stamp) VALUES ($value,'$name',$price,$quantity,$stamp) ON DUPLICATE KEY UPDATE product_name = '$name'";
+        if (!mysqli_query($con,$insert)) {
+            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        }
+    }
+    else if(!empty($Delete)){
+        mysqli_query($con,"DELETE FROM products WHERE product_id= $Delete");
+    }
+    else if(!empty($Edit)){
+        for($i=1;$i<=$rownum;$i++){
+            $editname = $_POST['name'.$i];
+            $editprice = $_POST['price'.$i];
+            $editquantity = $_POST['quantity'.$i];
+            $editstamp = $_POST['stamp'.$i];
+            $update = "UPDATE products SET product_name='$editname', product_price=$editprice, product_quantity=$editquantity, product_stamp=$editstamp WHERE product_id= $i";
+            mysqli_query($con,$update);
+        }
+    };
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,17 +42,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Management System</title>
+    <script src="src/searchbar.js"></script>
     <link href="src/style.css" rel="stylesheet">
     <style>
         table{
             border-collapse: collapse;
-            width: 50rem;
-            table-layout: fixed;
+            width: 60rem;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
             text-align: center;
-            padding: 8px;
+        }
+        #Edit_button{
+            background-color: rgb(113, 200, 50);
+        }
+        #Delete_button{
+            background-color: rgb(200, 50, 50);
+        }
+        form {
+            display: inline-block;
+            margin:0 0.5rem
         }
     </style>
 </head>
@@ -55,7 +95,7 @@
         </ul>
     </nav>
     <div class="content">
-        <h2>Edit storage</h2>
+        <h2>Storage Management</h2>
         <hr>
         <p>Add Product</p>
         <form method="post" action="edit_items.php">
@@ -65,45 +105,34 @@
             <label for="stamp">Stamp :</label><input type="number" id="stamp" name="stamp" min="0" placeholder="กรอกจำนวนแสตมป์เมื่อซื้อ" required><br>
             <br><button>ตกลง</button>
         </form>
-        <?php
-            $name=$_POST['name'];
-            $price=$_POST['price'];
-            $quantity=$_POST['quantity'];
-            $stamp=$_POST['stamp'];
-            while($row = mysqli_fetch_assoc($rowcount)){
-                array_push($existed,$row['product_id']);
-            }
-            $compare_array = range(1, max($existed)+1);
-            $missing_values = array_diff($compare_array, $existed);
-            $value = array_pop(array_reverse($missing_values));
-            if(!empty($name)){
-                $insert = "INSERT INTO products (product_id, product_name, product_price, product_quantity, product_stamp) VALUES ($value,'$name',$price,$quantity,$stamp) ON DUPLICATE KEY UPDATE product_name = '$name'";
-                if (!mysqli_query($con,$insert)) {
-                    echo "Error: " . $sql . "<br>" . mysqli_error($con);
-                }
-            };
-        ?>
+        <p>Search and Edit</p>
+        <input type="text" onkeyup="filter()" class="searchbar" name="search" placeholder="Search...">
+        <form id = "table" action="edit_items.php" method="post"></form>
+        <button id="Edit_button" type="submit" name="edit_item" form="table" value="1">Save</button></form>
         <p>รายการสินค้า</p>
-        <table>
+        <table id="products_T">
             <tr>
-                <th>รหัสสินค้า</th>
+                <th style="width:10%">รหัสสินค้า</th>
                 <th style="width:40%">ชื่อ</th>
                 <th>ราคา</th>
                 <th>จำนวนสินค้า</th>
                 <th>จำนวนแสตมป์</th>
+                <th>ลบ</th>
             </tr>
-            <?php $data = mysqli_query($con,"SELECT * FROM products");
-            while($row=mysqli_fetch_assoc($data)){
-                echo"<tr>";
-                echo"<th>".$row['product_id']."</th>";
-                echo"<th>".$row['product_name']."</th>";
-                echo"<th>".$row['product_price']."</th>";
-                echo"<th>".$row['product_quantity']."</th>";
-                echo"<th>".$row['product_stamp']."</th>";
-                echo"</tr>";
-            };
-            ?>
 
+            <?php
+                $data = mysqli_query($con,"SELECT * FROM products");
+                while($row=mysqli_fetch_assoc($data)){
+                    echo"<tr>";
+                    echo"<td>".$row['product_id']."</td>";
+                    echo"<td><input name='name".$row['product_id']."' type='text' form='table' value='".$row['product_name']."'></td>";
+                    echo"<td><input name='price".$row['product_id']."' type='text' form='table' value='".$row['product_price']."'></td>";
+                    echo"<td><input name='quantity".$row['product_id']."' type='text' form='table' value='".$row['product_quantity']."'></td>";
+                    echo"<td><input name='stamp".$row['product_id']."' type='text' form='table' value='".$row['product_stamp']."'></td>";
+                    echo'<td><form method="post" action="edit_items.php"><button id="Delete_button" type="submit" name="delete_item" value="'.$row['product_id'].'">Delete</button></form></td>';
+                    echo"</tr>";
+                };
+            ?>
         </table>
     </div>
     

@@ -138,3 +138,23 @@ button{
 input{
     margin:0.5rem 0;
 }
+
+#products_T input{
+    background-color: var(--bg-primary);
+    border: none;
+    color:var(--text-primary);
+    text-align: center;
+    font-family: "Kanit", Helvetica, Arial, sans-serif;
+}
+
+.searchbar{
+    width:20rem;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    height: 1.5rem;
+    transition: width 0.4s ease-out;
+}
+
+.searchbar:focus{
+    width:50rem;
+}
