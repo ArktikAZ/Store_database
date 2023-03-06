@@ -70,6 +70,18 @@
     filter: grayscale(0%) opacity(1);
 }
 
+.drop-down{
+    position: fixed;
+    background-color: black;
+    padding: 3px;
+}
+
+.drop-button{
+    background-color: rgb(46, 45, 45);
+    border-radius: 2px;
+    display:inline-block;
+}
+
 @media only screen and (min-width: 1000px){
     .sidebar{
         top:0;
@@ -99,6 +111,15 @@
     .sidebar:hover .nav-link{
         grid-template-columns: 5rem auto;
     }
+    .drop-down{
+        top:0;
+        right: 10rem;
+        width: 15rem;
+        height: 2rem;
+    }
+    .drop-button{
+        width: 15rem;
+    }
 }
 
 @media only screen and (max-width: 1000px){
@@ -126,7 +147,16 @@
         justify-content: center;
     }
     #Text{
-        display: none;
+        display:none
+    }
+    .drop-down{
+        top:10rem;
+        right: 0;
+        width: 2rem;
+        height: 15rem;
+    }
+    .drop-button{
+        height: 15rem;
     }
 }
 /*CSS for real content*/
