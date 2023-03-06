@@ -1,3 +1,6 @@
+<?php
+    require("dbconnect.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
     <style>
         table{
             border-collapse: collapse;
-            width: 50rem;
+            width: 75rem;
         }
         th,td{
             border: 1px solid rgb(103, 232, 255);
@@ -21,6 +24,11 @@
             color:black;
             width:max-content;
             padding: 8px;
+        }
+        .receipt-list{
+            width:100%;
+            display:grid;
+            grid-template-columns: 1fr 1fr 1fr;
         }
     </style>
 </head>
@@ -71,30 +79,104 @@
     <div class="content">
         <h2>Cash Register</h2>
         <hr>
-        <form>
-            <label for="name">Product :</label><input id="name" name="product_name" type="text" placeholder="กรอกรหัสสินค้า" required><br>
-            <label for="amount">Quantity :</label><input type="number" id="amount" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required> <button>ตกลง</button>
+        <form method="post" action="cash_register.php">
+            <label for="product_id">ProductID :</label><input id="product_id" name="product_id" type="number" placeholder="กรอกรหัสสินค้า" required><br>
+            <label for="quantity">Quantity :</label><input type="number" id="quantity" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required> <button>ตกลง</button>
         </form>
+        <?php
+            $id = $_POST["product_id"];
+            $quantity = $_POST["quantity"];
+            $Delete=$_POST['delete_item'];
+            $total_price = 0;
+            $total_stamp = 0;
+            $payment = $_POST["payment"];
+            if (!empty($id)){
+                $stockdata= mysqli_query($con,"SELECT product_name, product_quantity FROM products WHERE product_id = $id");
+                while($row = mysqli_fetch_assoc($stockdata)){
+                    $stock=$row['product_quantity'];
+                    $name=$row['product_name'];
+                }
+                if($stock>=$quantity){
+                    mysqli_query($con,"INSERT INTO temp (product_id,t_quantity) VALUES ($id,$quantity) ON DUPLICATE KEY UPDATE t_quantity = $quantity ");
+                }
+                else{
+                    echo "สินค้า $name ไม่พอในคลังสินค้า (ปัจจุบันมีอยู่ $stock)";
+                }
+            }
+            else if(!empty($Delete)){
+                mysqli_query($con,"DELETE FROM temp WHERE product_id= $Delete");
+            }
+            $data = mysqli_query($con,"SELECT temp.product_id, products.product_name,products.product_price,temp.t_quantity,products.product_stamp FROM products INNER JOIN temp ON products.product_id = temp.product_id");
+        ?>
         <p>รายการสินค้าที่ซื้อ</p>
         <table>
             <tr>
                 <th>ลำดับ</th>
-                <th>รายการ</th>
-                <th>ราคา</th>
+                <th style = "width:30%">รายการ</th>
+                <th>จำนวนสินค้าที่ซื้อ</th>
+                <th>ราคา/ชิ้น (บาท)</th>
+                <th>ราคารวม (บาท)</th>
+                <th>จำนวนแสตมป์/ชิ้น (ดวง)</th>
+                <th>จำนวนแสตมป์รวม (ดวง)</th>
+                <th>ลบ</th>
             </tr>
-        </table>
-        <p>ยอดรวม</p>
+            <?php
+                while($row = mysqli_fetch_assoc($data)){
+                    echo "<tr>";
+                    echo "<td>".$row['product_id']."</td>";
+                    echo "<td>".$row['product_name']."</td>";
+                    echo "<td>".$row['t_quantity']."</td>";
+                    echo "<td>".$row['product_price']."</td>";
+                    echo "<td>".$row['product_price']*$row['t_quantity']."</td>";
+                    echo "<td>".$row['product_stamp']."</td>";
+                    echo "<td>".$row['product_stamp']*$row['t_quantity']."</td>";
+                    echo'<td><form method="post" action="cash_register.php"><button id="Delete_button" type="submit" name="delete_item" value="'.$row['product_id'].'">Delete</button></form></td>';
+                    echo "</tr>";
+                    $total_price = $total_price+($row['product_price']*$row['t_quantity']);
+                    $total_stamp = $total_stamp+($row['product_stamp']*$row['t_quantity']);
+
+                }
+            ?>
+        </table> 
+        <?php
+            echo "<h2>ยอดรวม : $total_price บาท</h2>";
+        ?>
+        <form method="post" action="cash_register.php">
+            <label for="payment">จำนวนเงินที่ลูกค้าจ่าย (บาท) :</label><input id="payment" name="payment" type="number" placeholder="กรอกจำนวนเงินที่ลูกค้าจ่าย" required> <button>คิดเงิน/คิดใบเสร็จ</button><br>
+        </form>
         <hr>
         <p>ใบเสร็จ</p>
         <div class="receipt">
             <p style="text-align: center;">
                 ใบเสร็จรับเงิน/ใบกำกับภาษีอย่างย่อ
             </p>
-            <p>
-                ยอดสุทธิ ... บาท<br>
-                เงินสด/เงินทอน ... บาท<br>
-                แสตมป์ที่ได้ ... ชิ้น
-            </p>
+            <hr>
+            <div class='receipt-list'>
+                <p>ชื่อสินค้า</p>
+                <p style='justify-self:center'>จำนวน</p>
+                <p style='justify-self:end'>ราคารวม</p>
+            </div>
+            <?php
+                if (!empty($payment)){
+                    $data = mysqli_query($con,"SELECT temp.product_id, products.product_name,products.product_price,temp.t_quantity,products.product_stamp FROM products INNER JOIN temp ON products.product_id = temp.product_id");
+                    $change = $payment-$total_price;
+                    while($row = mysqli_fetch_assoc($data)){
+                        echo "<div class='receipt-list'>";
+                        echo "<p>".$row['product_name']."</p>";
+                        echo "<p style='justify-self:center'>".$row['t_quantity']." ชิ้น</p>";
+                        echo "<p style='justify-self:end'>".$row['product_price']*$row['t_quantity']." บาท</p>";
+                        echo "</div>";
+                    }
+                    echo "<hr>";
+                    echo "<p>
+                        ยอดสุทธิ $total_price บาท<br>
+                        รับเงินสด $payment บาท <br>
+                        เงินทอน $change บาท<br>
+                        แสตมป์ที่ได้ $total_stamp ดวง
+                    </p>";
+                    mysqli_query($con,"DELETE FROM temp");
+                }
+            ?>
         </div>
     </div>
 </body>
