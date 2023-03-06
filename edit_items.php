@@ -54,9 +54,6 @@
         #Edit_button{
             background-color: rgb(113, 200, 50);
         }
-        #Delete_button{
-            background-color: rgb(200, 50, 50);
-        }
         form {
             display: inline-block;
             margin:0 0.5rem
@@ -112,10 +109,10 @@
         <hr>
         <p>Add Product</p>
         <form method="post" action="edit_items.php">
-            <label for="name">Product name :</label><input id="name" name="name" type="text" placeholder="กรอกชื่อสินค้า" required><br>
-            <label for="price">Price :</label><input type="number" id="price" name="price" min="0" placeholder="กรอกราคาสินค้า" required><br>
-            <label for="quantity">Quantity :</label><input type="number" id="quantity" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required><br>
-            <label for="stamp">Stamp :</label><input type="number" id="stamp" name="stamp" min="0" placeholder="กรอกจำนวนแสตมป์เมื่อซื้อ" required><br>
+            <label for="name">ชื่อสินค้า : </label><input id="name" name="name" type="text" placeholder="กรอกชื่อสินค้า" required><br>
+            <label for="price">ราคาสินค้า : </label><input type="number" id="price" name="price" min="0" placeholder="กรอกราคาสินค้า" required><br>
+            <label for="quantity">จำนวนสินค้า : </label><input type="number" id="quantity" name="quantity" min="1" placeholder="กรอกจำนวนสินค้า" required><br>
+            <label for="stamp">จำนวนแสตมป์ : </label><input type="number" id="stamp" name="stamp" min="0" placeholder="กรอกจำนวนแสตมป์เมื่อซื้อ" required><br>
             <br><button>ตกลง</button>
         </form>
         <p>Search and Edit</p>
@@ -127,9 +124,9 @@
             <tr>
                 <th style="width:10%">รหัสสินค้า</th>
                 <th style="width:40%">ชื่อ</th>
-                <th>ราคา</th>
-                <th>จำนวนสินค้า</th>
-                <th>จำนวนแสตมป์</th>
+                <th>ราคา (บาท)</th>
+                <th>จำนวนสินค้า (ชิ้น)</th>
+                <th>จำนวนแสตมป์ (ดวง)</th>
                 <th>ลบ</th>
             </tr>
 

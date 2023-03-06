@@ -76,9 +76,9 @@
         <tr>
                 <th style="width:10%">รหัสสินค้า</th>
                 <th style="width:40%">ชื่อ</th>
-                <th>ราคา</th>
-                <th>จำนวนสินค้า</th>
-                <th>จำนวนแสตมป์</th>
+                <th>ราคา (บาท)</th>
+                <th>จำนวนสินค้า (ชิ้น)</th>
+                <th>จำนวนแสตมป์ (ดวง)</th>
             </tr>
             <?php
                 $data = mysqli_query($con,"SELECT * FROM products");
