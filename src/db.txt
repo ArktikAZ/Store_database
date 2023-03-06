@@ -1,11 +1,23 @@
-Customer table
+customer table
 fields
 -name
 -surname
 -amount of stamp
 
-Product table
+products table
 fields
--product_name
--product_price
--stamp
+-product_id (int)
+-product_name (varchar)
+-product_price (int)
+-product_quantity (int)
+-product_stamp (int)
+
+temp table
+fields
+-product_id (int)
+-t_quantity (int)
+
+login table
+fields
+-Username (varchar)
+-Password (varchar)

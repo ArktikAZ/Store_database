@@ -191,15 +191,12 @@ input{
 }
 
 .hidden{
-    transition: transform 1s ease-out,opacity 1s ease-out;
+    transition: opacity 1s ease-out;
     opacity: 0;
-    transform: translateX(100%);
 }
 
 .show{
-    transition: transform 1s ease-out ,opacity 1s ease-out;
     opacity: 1;
-    transform: translateX(0%);
 }
 
 @media(prefer-reduce-motion){

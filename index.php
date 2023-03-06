@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(empty($_SESSION['log'])){
+        header('location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,15 +66,11 @@
             <section class="hidden">
                 <h2>การใช้งานหน้า Edit</h2>
                 <p>ในส่วนของหน้า Edit นั้น มีไว้สำหรับการแก้ไขข้อมูลของสินค้า ซึ่งแบ่งออกเป็น 2 ส่วน ดังนี้<br></p>
-            </section>
-            <section class="hidden">
                 <div class="edit_1">
                     <p>1. Add Product<br></p>
                     <img src="src/img/add_product.png"><br>
                     <p>เป็นส่วนที่ไว้สำหรับการเพิ่มข้อมูลของสินค้าชนิดใหม่เข้าไป โดยกรอกข้อมูลเข้าไป จากนั้นกดตกลง</p>
                 </div>
-            </section>
-            <section class="hidden">
                 <div class="edit_2">
                     <p>2. Search and Edit<br></p>
                     <img src="src/img/search.png"><br>
@@ -82,14 +84,14 @@
             <section class="hidden">
                 <h2>การใช้งานหน้า show</h2>
                 <p>ในส่วนของหน้า Show จะเป็นหน้าที่ไว้สำหรับการแสดงข้อมูล ซึ่งสามารถ search ข้อมูลจากช่อง search ได้<br></p>
-                <img src="src/img/show.png"><br>
+                <img src="src/img/show.png" width="800px"><br>
             </section>
         </div>
         <div class="WebDoc">
             <section class="hidden">
                 <h2>การใช้งานหน้า Cash Register</h2>
                 <p>ในส่วนของหน้า Cash Register จะเป็นหน้าที่ไว้สำหรับการคิดคำนวณใบเสร็จของลูกค้า<br></p>
-                <img src="src/img/reciept.png"><br>
+                <img src="src/img/reciept.png" width="1000px"><br>
                 <p>เริ่มจากการกรอกรหัสของสินค้าที่ลูกค้าซื้อ และจำนวนของสินค้าที่ลูกค้าซื้อ เมื่อกดตกลง รายการของสินค้าจะแสดงขึ้นในตาราง ถ้าต้องการแก้ไขจำนวนสินค้าของลูกค้า ให้กรอกรหัสของสินค้า จากนั้นกรอกจำนวนสินค้าที่ต้องการแก้ลงไป สามารถกดลบสินค้าที่ไม่ต้องการได้ผ่านการกดปุ่ม Delete เหมือนในหน้า edit เมื่อกรอกสินค้าทั้งหมดครบแล้ว ให้ทำการกรอกจำนวนเงินที่ลูกค้าจ่าย เมื่อกดคิดเงิน ใบเสร็จจะถูกแสดงขึ้น เมื่อต้องการทำรายการใหม่ ให้กรอกรหัสของสินค้ารอบใหม่ลงไป แล้วระบบจะเคลียร์ใบเสร็จ และเปลี่ยนข้อมูลในตารางเป็นข้อมูลใหม่ที่คุณกรอกลงไป</p>
             </section>
         </div>

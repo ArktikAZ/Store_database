@@ -1,5 +1,9 @@
 <?php
     require("dbconnect.php");
+    session_start();
+    if(empty($_SESSION['log'])){
+        header('location: login.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
