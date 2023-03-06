@@ -158,7 +158,7 @@
             </div>
             <?php
                 if (!empty($payment)){
-                    $data = mysqli_query($con,"SELECT temp.product_id, products.product_name,products.product_price,temp.t_quantity,products.product_stamp FROM products INNER JOIN temp ON products.product_id = temp.product_id");
+                    $data = mysqli_query($con,"SELECT temp.product_id, products.product_name,products.product_price,temp.t_quantity, products.product_quantity, products.product_stamp FROM products INNER JOIN temp ON products.product_id = temp.product_id");
                     $change = $payment-$total_price;
                     while($row = mysqli_fetch_assoc($data)){
                         echo "<div class='receipt-list'>";
@@ -166,6 +166,8 @@
                         echo "<p style='justify-self:center'>".$row['t_quantity']." ชิ้น</p>";
                         echo "<p style='justify-self:end'>".$row['product_price']*$row['t_quantity']." บาท</p>";
                         echo "</div>";
+                        $left = $row['product_quantity']-$row['t_quantity'];
+                        mysqli_query($con,"UPDATE products SET product_quantity=$left WHERE product_id=".$row['product_id']);
                     }
                     echo "<hr>";
                     echo "<p>
