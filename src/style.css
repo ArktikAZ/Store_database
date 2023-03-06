@@ -33,7 +33,7 @@
 
 #m1{
     transition: all 500ms ease;
-    transform: translateY(-20%);
+    transform: translateY(-40%);
 }
 
 .sidebar:hover #m1{
@@ -51,7 +51,6 @@
     transition: 400ms;
 }
 .nav-link:hover{
-    grid-template-columns: 40% 60%;
     filter: grayscale(0%) opacity(1);
     background: var(--bg-navhover);
     color: var(--text-primary);
@@ -71,7 +70,7 @@
     filter: grayscale(0%) opacity(1);
 }
 
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 1000px){
     .sidebar{
         top:0;
         width: 5rem;
@@ -102,7 +101,7 @@
     }
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 1000px){
     .sidebar{
         top:0;
         width: 100vw;
@@ -125,6 +124,9 @@
     .nav-link{
         display: flex;
         justify-content: center;
+    }
+    #Text{
+        display: none;
     }
 }
 /*CSS for real content*/

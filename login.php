@@ -43,6 +43,7 @@
             justify-items: center;
         }
         #m1{
+            transform: translateY(0%);
             animation: updown 2s forwards infinite;
         }
         @keyframes updown {

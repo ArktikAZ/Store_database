@@ -31,7 +31,7 @@
     <nav class="sidebar">
         <ul class="sidebar-nav">
             <li class="nav-item logo"> 
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 -15 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Frame 1">
                         <path id="l1" d="M41.7487 54.7317L31.6361 54.7317L41.7487 44.7317L41.7487 54.7317Z" fill="#C9F6DF"/>
                         <path id="m1" d="M48.7487 19.7317L41.7487 12.7317L55.7487 12.7317L48.7487 19.7317Z" fill="#B8F1D9"/>
