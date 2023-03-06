@@ -22,6 +22,21 @@
 
 .nav-item{
     width: 100%;
+    text-align: center;
+}
+
+.nav-item svg{
+    min-width: 5rem;
+    max-width: 8rem;
+}
+
+#m1{
+    transition: all 500ms ease;
+    transform: translateY(-20%);
+}
+
+.sidebar:hover #m1{
+    transform: translateY(0%);
 }
 
 .nav-link{
@@ -139,7 +154,7 @@ input{
     margin:0.5rem 0;
 }
 
-#products_T input{
+#edit_table input{
     background-color: var(--bg-primary);
     border: none;
     color:var(--text-primary);
