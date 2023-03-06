@@ -75,7 +75,7 @@
             </li>
             <li class="nav-item active"> 
                 <a class="nav-link" href="management_team.php">
-                    <svg viewBox="0 0 100 100" fill="currentcolor" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="23 0 50 50" fill="currentcolor" xmlns="http://www.w3.org/2000/svg">
                         <g id="Frame1">
                             <path id="l1" d="M41.7487 54.7317L31.6361 54.7317L41.7487 44.7317L41.7487 54.7317Z"/>
                             <path id="m1" d="M48.7487 19.7317L41.7487 12.7317L55.7487 12.7317L48.7487 19.7317Z"/>

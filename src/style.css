@@ -41,8 +41,9 @@
 }
 
 .nav-link{
-    display: flex;
     text-decoration: none;
+    display:grid;
+    justify-items: center;
     align-items: center;
     color: var(--text-secondary);
     height: 5rem;
@@ -50,6 +51,7 @@
     transition: 400ms;
 }
 .nav-link:hover{
+    grid-template-columns: 40% 60%;
     filter: grayscale(0%) opacity(1);
     background: var(--bg-navhover);
     color: var(--text-primary);
@@ -58,13 +60,11 @@
     min-width: 2rem;
     max-width: 2rem;
     max-height: 2rem;
-    margin:0 1.5rem;
     color:rgb(36, 93, 208);
 }
 
 .link-text{
     display: none;
-    margin-left: 1rem;
 }
 
 .active .nav-link{
@@ -96,6 +96,9 @@
         flex-direction: column;
         align-items: center;
         height: 100%;
+    }
+    .sidebar:hover .nav-link{
+        grid-template-columns: 5rem auto;
     }
 }
 
