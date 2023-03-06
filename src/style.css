@@ -14,6 +14,7 @@
     position: fixed;
     background-color: var(--bg-nav);
     transition: width 100ms ease;
+    z-index:99;
 }
 
 .nav-item:last-child{
@@ -173,10 +174,39 @@ input{
 .searchbar:focus{
     width:50rem;
 }
+
 #Delete_button{
     background-color: rgb(200, 50, 50);
 }
-.left{
-    width: fit-content;
-    margin: 0;
+
+/*Home page*/
+.WebDoc{
+    margin-bottom: 5rem;
+    padding: 1rem;
+}
+
+.WebDoc img{
+    border-radius: 1rem;
+    border:0.5rem solid #ffffff; 
+}
+
+.hidden{
+    transition: transform 1s ease-out,opacity 1s ease-out;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.show{
+    transition: transform 1s ease-out ,opacity 1s ease-out;
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+@media(prefer-reduce-motion){
+    .hidden{
+        transition:none;
+    }
+    .show{
+        transition:none;
+    }
 }
