@@ -125,6 +125,9 @@
             </li>
         </ul>
     </nav>
+    <nav class="drop-down">
+        <form method="post" action="logout.php"><button class="drop-button" name="log-out" value="logout">Log Out</button></form>
+    </nav>
     <div class="content">
         <h2>Storage Management</h2>
         <hr>

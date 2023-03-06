@@ -92,7 +92,10 @@
             </li>
         </ul>
     </nav>
-    <div class="content" style=" padding-top: 1px;">
+    <nav class="drop-down">
+        <form method="post" action="logout.php"><button class="drop-button" name="log-out" value="logout">Log Out</button></form>
+    </nav>
+    <div class="content" style="padding-top: 1px;">
         <h2 style="text-align: center;">ทำเนียบผู้บริหาร</h2>
         <hr>
     </div>

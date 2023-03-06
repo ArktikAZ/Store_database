@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    session_destroy();
     require('dbconnect.php');
     $user = $_POST['username'];
     $pass = $_POST['password'];
@@ -8,8 +10,10 @@
             $found = $row['COUNT(1)'];
         }
         if($found==1){
+            $user="";
+            $pass="";
             session_start();
-            $_SESSION["log"] = true;
+            $_SESSION["log"] = "LOGGED";
             header('Location: index.php');
         }
     }
@@ -43,7 +47,7 @@
             justify-items: center;
         }
         #m1{
-            transform: translateY(0%);
+            transform:translateY(0%);
             animation: updown 2s forwards infinite;
         }
         @keyframes updown {
